@@ -4,6 +4,7 @@ public class Debuging : MonoBehaviour
 {
     Player_attributes_handler attr_instance;
     Hotbar_logic hbar_instance;
+    Selection_slot_logic sel_slot;
 
     private bool inventory_opened = false;
 
@@ -11,6 +12,7 @@ public class Debuging : MonoBehaviour
     {
         attr_instance = GetComponent<Player_attributes_handler>();
         hbar_instance = transform.Find("Hud/Hotbar").GetComponent<Hotbar_logic>();
+        sel_slot = transform.Find("Hud/Inventory/Selection").GetComponent<Selection_slot_logic>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Debuging : MonoBehaviour
                     Cursor.visible = false;
                     attr_instance.inMenu = false;
                     inventory_opened = false;
+                    sel_slot.Reset_Selection();
                     transform.Find("Hud/Inventory").gameObject.SetActive(false);
                 }
                 else

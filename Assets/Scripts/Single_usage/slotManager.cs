@@ -6,10 +6,10 @@ public class slotManager : MonoBehaviour
     public Item contained_Item;
     public int quant_Item;
 
-    Transform qnt;
-    Transform its;
+    protected Transform qnt;
+    protected Transform its;
 
-    protected void Awake()
+    protected void Start()
     {
         qnt = transform.Find("Quantity");
         its = transform.Find("Item_image");
@@ -18,7 +18,12 @@ public class slotManager : MonoBehaviour
     public void change_Item(Item x)
     {
         contained_Item = x;
-        its.GetComponent<Image>().sprite = x.inventory_icon;
+        its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
+    }
+
+    public void set_quant(int n)
+    {
+        quant_Item = n;
     }
 
     public void add_quant(int n)
@@ -33,6 +38,8 @@ public class slotManager : MonoBehaviour
 
     public void Display_Update()
     {
+        if (quant_Item == 0)
+            contained_Item = null;
         if (qnt != null && its != null)
         {
             if (quant_Item > 1)
@@ -43,7 +50,7 @@ public class slotManager : MonoBehaviour
                 if (its.gameObject.activeSelf != true)
                     its.gameObject.SetActive(true);
             }
-            else if (quant_Item == 1)
+            else if (quant_Item <= 1)
             {
                 if (qnt.gameObject.activeSelf != false)
                     qnt.gameObject.SetActive(false);

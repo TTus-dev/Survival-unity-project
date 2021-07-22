@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Picking_up_items : MonoBehaviour
 {
-    Item_logic dropped_item;
-    Transform prev_aimed_object;
     Transform pdialog;
     Transform inv;
     Transform hotbar;
+
+    Player_attributes_handler pattr;
 
     struct partial_pickup_info
     {
@@ -19,9 +19,11 @@ public class Picking_up_items : MonoBehaviour
 
     private void Start()
     {
-        pdialog = transform.Find("Hud/Pick_up_dialog");
-        inv = transform.Find("Hud/Inventory/Background");
-        hotbar = transform.Find("Hud/Hotbar");
+        Transform hud = transform.Find("Hud");
+        pdialog = hud.Find("Pick_up_dialog");
+        inv = hud.Find("Inventory/Background");
+        hotbar = hud.Find("Hotbar");
+        pattr = GetComponent<Player_attributes_handler>();
     }
 
     void Update()
@@ -29,13 +31,13 @@ public class Picking_up_items : MonoBehaviour
         Camera cam = transform.Find("Player_cam").GetComponent<Camera>();
         Ray cam_ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(cam_ray, out hit) && hit.distance < 2.5f)
+        if (Physics.Raycast(cam_ray, out hit) && hit.distance < 2.5f && !pattr.inMenu)
         {
             Transform aimed_object = hit.transform;
             if (aimed_object.CompareTag("Pickable"))
             {
-                dropped_item = aimed_object.GetComponent<Item_logic>();
-                partial_pickup_info info = place_checker();
+                Item_logic dropped_item = aimed_object.GetComponent<Item_logic>();
+                partial_pickup_info info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
                 Transform slot = info.slot;
                 Text pdialogt = pdialog.GetComponent<Text>();
                 pdialogt.text = $"{dropped_item.scrptbl_obj.item_name} ({dropped_item.contained_items})";
@@ -54,7 +56,7 @@ public class Picking_up_items : MonoBehaviour
                     bool stop_pickingup = false;
                     while (!stop_pickingup)
                     {
-                        info = place_checker();
+                        info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
                         slot = info.slot;
                         if (slot != null)
                         {
@@ -74,7 +76,6 @@ public class Picking_up_items : MonoBehaviour
             {
                 pdialog.gameObject.SetActive(false);
             }
-            prev_aimed_object = aimed_object;
         }
         else
         {
@@ -82,43 +83,49 @@ public class Picking_up_items : MonoBehaviour
         }
     }
 
-    partial_pickup_info _place_checker_helper(Transform slot)
+    public int _place_checker_helper(Transform slot, Item item, int item_ammount)
     {
-        partial_pickup_info result;
         slotManager SM = slot.GetComponent<slotManager>();
-        result.slot = slot;
-        result.pickeditem_no = 0;
-        if (SM.contained_Item == dropped_item.scrptbl_obj || SM.contained_Item == null)
+        if (SM.contained_Item == item || SM.contained_Item == null)
         {
-            if (SM.quant_Item + dropped_item.contained_items < 21)
+            if (SM.quant_Item + item_ammount < 21)
             {
-                result.pickeditem_no = dropped_item.contained_items;
+                return item_ammount;
             }
-            else if (SM.quant_Item + dropped_item.contained_items > 20 && SM.quant_Item < 20)
+            else if (SM.quant_Item + item_ammount > 20 && SM.quant_Item < 20)
             {
-                result.pickeditem_no = 20 - SM.quant_Item;
+                return 20 - SM.quant_Item;
             }
         }
-        return result;
+        return 0;
     }
 
-    partial_pickup_info place_checker()
+    partial_pickup_info place_checker(Item item, int item_ammount)
     {
-        partial_pickup_info result;
+        partial_pickup_info pChecker_result;
+        int isPlace_result;
         foreach (Transform child in hotbar)
         {
-            result = _place_checker_helper(child);
-            if (result.pickeditem_no > 0)
-                return result;
+            isPlace_result = _place_checker_helper(child, item, item_ammount);
+            if (isPlace_result > 0)
+            {
+                pChecker_result.slot = child;
+                pChecker_result.pickeditem_no = isPlace_result;
+                return pChecker_result;
+            }
         }
         foreach (Transform child in inv)
         {
-            result = _place_checker_helper(child);
-            if (result.pickeditem_no > 0)
-                return result;
+            isPlace_result = _place_checker_helper(child, item, item_ammount);
+            if (isPlace_result > 0)
+            {
+                pChecker_result.slot = child;
+                pChecker_result.pickeditem_no = isPlace_result;
+                return pChecker_result;
+            }
         }
-        result.slot = null;
-        result.pickeditem_no = 0;
-        return result;
+        pChecker_result.slot = null;
+        pChecker_result.pickeditem_no = 0;
+        return pChecker_result;
     }
 }

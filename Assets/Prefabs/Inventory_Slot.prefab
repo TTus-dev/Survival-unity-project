@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6289363436844603744}
   - component: {fileID: 6530372373951807209}
-  - component: {fileID: -8592160925234624996}
+  - component: {fileID: 7887904501470089589}
   m_Layer: 0
   m_Name: Inventory_Slot
   m_TagString: Untagged
@@ -274,7 +274,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9111075132801996785}
   m_CullTransparentMesh: 0
---- !u!114 &-8592160925234624996
+--- !u!114 &7887904501470089589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9111075132801996785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c4fe79e9a135c41b32b3359ba6448a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fb5e76929ced8b47ac14ac4dfb2fcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   contained_Item: {fileID: 0}
