@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class slotManagerInv : slotManager, IPointerClickHandler
+public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     slotManager Selection_slotsm;
     Selection_slot_logic Selection_slotl;
     Picking_up_items pui_script;
+
+    Transform Hotbar;
+
+    slotManagerInv hotbar_slot = null;
+
+    bool cursor_Over = false;
 
     private new void Start()
     {
@@ -14,6 +19,59 @@ public class slotManagerInv : slotManager, IPointerClickHandler
         Selection_slotsm = GameObject.Find("Player/Hud/Inventory/Selection").GetComponent<slotManager>();
         Selection_slotl = GameObject.Find("Player/Hud/Inventory/Selection").GetComponent<Selection_slot_logic>();
         pui_script = GameObject.Find("Player").GetComponent<Picking_up_items>();
+        Hotbar = GameObject.Find("Player/Hud/Hotbar").transform;
+    }
+
+    private void Update()
+    {
+        if (cursor_Over)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                hotbar_slot = Hotbar.GetChild(0).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                hotbar_slot = Hotbar.GetChild(1).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                hotbar_slot = Hotbar.GetChild(2).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                hotbar_slot = Hotbar.GetChild(3).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                hotbar_slot = Hotbar.GetChild(4).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                hotbar_slot = Hotbar.GetChild(5).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                hotbar_slot = Hotbar.GetChild(6).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                hotbar_slot = Hotbar.GetChild(7).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                hotbar_slot = Hotbar.GetChild(8).GetComponent<slotManagerInv>();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                hotbar_slot = Hotbar.GetChild(9).GetComponent<slotManagerInv>();
+            }
+            if (hotbar_slot != null)
+                exchange(hotbar_slot);
+        }
+        hotbar_slot = null;
+        Selection_slotsm.Display_Update();
+        Display_Update();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -34,13 +92,13 @@ public class slotManagerInv : slotManager, IPointerClickHandler
                     if (Selection_slotsm.quant_Item == 20 || quant_Item == 20 && Selection_slotsm.quant_Item != quant_Item)
                     {
                         int temp = Selection_slotsm.quant_Item;
-                        Selection_slotsm.quant_Item = quant_Item;
-                        quant_Item = temp;
+                        Selection_slotsm.set_quant(quant_Item);
+                        set_quant(temp);
                     }
                     else if(quant_Item < 20)
                     {
                         int quant_toAdd = pui_script._place_checker_helper(transform, Selection_slotsm.contained_Item, Selection_slotsm.quant_Item);
-                        Selection_slotsm.quant_Item -= quant_toAdd;
+                        Selection_slotsm.subtract_quant(quant_toAdd);
                         add_quant(quant_toAdd);
                     }
                 }
@@ -48,12 +106,12 @@ public class slotManagerInv : slotManager, IPointerClickHandler
                 {
                     change_Item(Selection_slotsm.contained_Item);
                     set_quant(Selection_slotsm.quant_Item);
-                    Selection_slotsm.quant_Item = 0;
+                    Selection_slotsm.set_quant(0);
                     Selection_slotsm.contained_Item = null;
                 }
-                else
+                else if (contained_Item != Selection_slotsm.contained_Item)
                 {
-                    Debug.Log("different items");
+                    exchange(Selection_slotsm);
                 }
             }
         }
@@ -64,18 +122,36 @@ public class slotManagerInv : slotManager, IPointerClickHandler
                 Selection_slotsm.change_Item(contained_Item);
                 int half = (int)Mathf.Ceil((float)quant_Item / 2);
                 Selection_slotsm.set_quant(half);
-                quant_Item -= half;
+                subtract_quant(half);
+                Selection_slotl.Prev_slot = transform.GetComponent<slotManagerInv>();
             }
             else if (Selection_slotsm.contained_Item != null)
             {
-                if (contained_Item == null)
-                    change_Item(Selection_slotsm.contained_Item);
-                int quant_toAdd = pui_script._place_checker_helper(transform, Selection_slotsm.contained_Item, 1);
-                Selection_slotsm.quant_Item -= quant_toAdd;
-                add_quant(quant_toAdd);
+                if (Selection_slotsm.contained_Item == contained_Item || contained_Item == null)
+                {
+                    if (contained_Item == null)
+                        change_Item(Selection_slotsm.contained_Item);
+                    int quant_toAdd = pui_script._place_checker_helper(transform, Selection_slotsm.contained_Item, 1);
+                    Selection_slotsm.subtract_quant(quant_toAdd);
+                    add_quant(quant_toAdd);
+                }
+                else if (contained_Item != Selection_slotsm.contained_Item)
+                {
+                    exchange(Selection_slotsm);
+                }
             }
         }
-        Selection_slotsm.Display_Update();
-        Display_Update();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!cursor_Over)
+            cursor_Over = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (cursor_Over)
+            cursor_Over = false;
     }
 }

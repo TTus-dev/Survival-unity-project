@@ -15,10 +15,21 @@ public class slotManager : MonoBehaviour
         its = transform.Find("Item_image");
     }
 
+    public void exchange(slotManager s)
+    {
+        int temp_quant = s.quant_Item;
+        Item temp_contained = s.contained_Item;
+        s.quant_Item = quant_Item;
+        s.change_Item(contained_Item);
+        quant_Item = temp_quant;
+        change_Item(temp_contained);
+    }
+
     public void change_Item(Item x)
     {
         contained_Item = x;
-        its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
+        if (contained_Item != null)
+            its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
     }
 
     public void set_quant(int n)
