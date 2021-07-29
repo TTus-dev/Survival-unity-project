@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3649582246014881171}
   - component: {fileID: 4561352701368216090}
-  - component: {fileID: -124808499494429725}
+  - component: {fileID: 7932071781213353862}
   m_Layer: 0
   m_Name: Hotbar_slot
   m_TagString: Untagged
@@ -49,7 +49,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989658107343995650}
   m_CullTransparentMesh: 0
---- !u!114 &-124808499494429725
+--- !u!114 &7932071781213353862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contained_Item: {fileID: 0}
   quant_Item: 0
+  current_uses: 0
 --- !u!1 &2952237425952531111
 GameObject:
   m_ObjectHideFlags: 0

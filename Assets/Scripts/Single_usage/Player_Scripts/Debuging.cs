@@ -28,6 +28,7 @@ public class Debuging : MonoBehaviour
                     attr_instance.inMenu = false;
                     sel_slot.Reset_Selection();
                     transform.Find("Hud/Inventory").gameObject.SetActive(false);
+                    transform.Find("Hud/Panel").gameObject.SetActive(false);
                 }
                 else
                 {
@@ -35,6 +36,7 @@ public class Debuging : MonoBehaviour
                     Cursor.visible = true;
                     attr_instance.inMenu = true;
                     transform.Find("Hud/Inventory").gameObject.SetActive(true);
+                    transform.Find("Hud/Panel").gameObject.SetActive(true);
                 }
             }
         }

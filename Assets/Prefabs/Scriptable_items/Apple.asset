@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   item_name: "Jab\u0142ko"
+  prefab: {fileID: 6439845505451950849, guid: bcf5f66a81ff0ae4b8f8827cb366b169, type: 3}
   inventory_icon: {fileID: 21300000, guid: effba07561b3eb74d8f7f09cdb6b18fa, type: 3}
   uses: 1
+  nutrive_value: 5
+  thrist_value: 0

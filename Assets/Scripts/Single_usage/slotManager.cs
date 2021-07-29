@@ -15,6 +15,11 @@ public class slotManager : MonoBehaviour
         its = transform.Find("Item_image");
     }
 
+    private void Update()
+    {
+        Display_Update();
+    }
+
     public void exchange(slotManager s)
     {
         int temp_quant = s.quant_Item;

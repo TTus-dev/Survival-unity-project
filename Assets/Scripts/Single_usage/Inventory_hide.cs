@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Invenotry_hide : MonoBehaviour
+public class Inventory_hide : MonoBehaviour
 {
     private void Start()
     {

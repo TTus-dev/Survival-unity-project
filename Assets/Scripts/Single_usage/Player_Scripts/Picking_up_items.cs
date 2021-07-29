@@ -60,11 +60,9 @@ public class Picking_up_items : MonoBehaviour
                         slot = info.slot;
                         if (slot != null)
                         {
-                            slotManager SM = slot.GetComponent<slotManager>();
-                            if (SM.contained_Item != dropped_item.scrptbl_obj)
-                                SM.change_Item(dropped_item.scrptbl_obj);
+                            slotManagerInv SM = slot.GetComponent<slotManagerInv>();
+                            SM.change_Item(dropped_item.scrptbl_obj);
                             SM.add_quant(info.pickeditem_no);
-                            SM.Display_Update();
                             stop_pickingup = dropped_item.remove_count(info.pickeditem_no);
                         }
                         if (slot == inv.GetChild(inv.childCount - 1) || slot == null)

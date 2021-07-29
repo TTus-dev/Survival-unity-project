@@ -14,6 +14,22 @@ public class Hotbar_logic : MonoBehaviour
         Display_update(true);
     }
 
+    private void Update()
+    {
+        if (!attr_instance.inMenu)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                slotManagerInv hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
+                if (hotbar_slot.contained_Item != null)
+                {
+                    hotbar_slot.contained_Item.Use();
+                    hotbar_slot.remove_Use();
+                }
+            }
+        }
+    }
+
     void Display_update(bool display_state)
     {
         transform.GetChild(Slot_selected).GetChild(0).gameObject.SetActive(display_state);

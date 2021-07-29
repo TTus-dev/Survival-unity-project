@@ -13,6 +13,8 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
 
     bool cursor_Over = false;
 
+    public int current_uses;
+
     private new void Start()
     {
         base.Start();
@@ -24,6 +26,11 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
 
     private void Update()
     {
+        if (contained_Item != null && current_uses == 0)
+        {
+            quant_Item -= 1;
+            current_uses = contained_Item.max_uses;
+        }
         if (cursor_Over)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -68,10 +75,20 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
             }
             if (hotbar_slot != null)
                 exchange(hotbar_slot);
+            hotbar_slot = null;
         }
-        hotbar_slot = null;
-        Selection_slotsm.Display_Update();
         Display_Update();
+    }
+
+    public new void change_Item(Item x)
+    {
+        base.change_Item(x);
+        current_uses = x.max_uses;
+    }
+
+    public void remove_Use()
+    {
+        current_uses -= 1;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -107,7 +124,7 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
                     change_Item(Selection_slotsm.contained_Item);
                     set_quant(Selection_slotsm.quant_Item);
                     Selection_slotsm.set_quant(0);
-                    Selection_slotsm.contained_Item = null;
+                    Selection_slotsm.change_Item(null);
                 }
                 else if (contained_Item != Selection_slotsm.contained_Item)
                 {

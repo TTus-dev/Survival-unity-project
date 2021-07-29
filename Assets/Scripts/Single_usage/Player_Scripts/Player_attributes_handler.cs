@@ -8,7 +8,7 @@ public class Player_attributes_handler : MonoBehaviour
     private Transform thirst_bar;
     private Transform hunger_bar;
 
-    private int pcurr_hunger, pmax_hunger, pcurr_thirst, pmax_thirst, pcurr_health, pmax_health;
+    private float pcurr_hunger, pmax_hunger, pcurr_thirst, pmax_thirst, pcurr_health, pmax_health;
 
     public bool inMenu = false;
 
@@ -20,9 +20,11 @@ public class Player_attributes_handler : MonoBehaviour
         pcurr_health = pmax_health = 100;
         pcurr_thirst = pmax_thirst = 100;
         pcurr_hunger = pmax_hunger = 100;
+        pcurr_thirst = 20;
+        pcurr_hunger = 20;
     }
 
-    public void change_Health(int x)
+    public void change_Health(float x)
     {
         if (pcurr_health + x > pmax_health)
             pcurr_health = pmax_health;
@@ -33,7 +35,7 @@ public class Player_attributes_handler : MonoBehaviour
         update_Bar(pcurr_health, pmax_health, health_bar);
     }
 
-    public void change_Thirst(int x)
+    public void change_Thirst(float x)
     {
         if (pcurr_thirst + x > pmax_thirst)
             pcurr_thirst = pmax_thirst;
@@ -44,7 +46,7 @@ public class Player_attributes_handler : MonoBehaviour
         update_Bar(pcurr_thirst, pmax_thirst, thirst_bar);
     }
 
-    public void change_Hunger(int x)
+    public void change_Hunger(float x)
     {
         if (pcurr_hunger + x > pmax_hunger)
             pcurr_hunger = pmax_hunger;
