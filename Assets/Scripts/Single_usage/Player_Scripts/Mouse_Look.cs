@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Mouse_Look : MonoBehaviour
 {
-    public Transform player;
     public Transform cam;
+    public Transform pov_holder;
 
     public float mouse_sens_x;
     public float mouse_sens_y;
@@ -31,10 +31,11 @@ public class Mouse_Look : MonoBehaviour
             float mouseY = Input.GetAxis("Mouse Y") * mouse_sens_y * 100 * Time.deltaTime;
 
             xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -60f, 50f);
-            transform.Find("Player_cam").localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            xRotation = Mathf.Clamp(xRotation, -90f, 65f);
+            cam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
             transform.Rotate(Vector3.up * mouseX);
         }
+
     }
 }

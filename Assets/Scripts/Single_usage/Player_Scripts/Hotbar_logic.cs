@@ -6,7 +6,11 @@ public class Hotbar_logic : MonoBehaviour
 {
     Player_attributes_handler attr_instance;
 
+    Item last_held;
+
     int Slot_selected = 0;
+
+    public Transform pov_hldr;
 
     private void Start()
     {
@@ -26,6 +30,27 @@ public class Hotbar_logic : MonoBehaviour
                     hotbar_slot.contained_Item.Use();
                     hotbar_slot.remove_Use();
                 }
+            }
+        }
+        pov_holder_update();
+    }
+
+    void pov_holder_update()
+    {
+        slotManagerInv hbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
+        if (pov_hldr.childCount != 0 && (pov_hldr.GetChild(0).GetComponent<Item_logic>().scrptbl_obj != hbar_slot.contained_Item || hbar_slot.contained_Item == null))
+        {
+            GameObject.Destroy(pov_hldr.GetChild(0).gameObject, 0);
+        }
+        if (pov_hldr.childCount == 0)
+        {
+            if (hbar_slot.contained_Item != null)
+            {
+                GameObject item_held = Instantiate(hbar_slot.contained_Item.prefab, new Vector3(0, 0, 0), Quaternion.identity);
+                item_held.transform.SetParent(pov_hldr);
+                item_held.transform.localPosition = new Vector3(0, -item_held.transform.localScale.y / 2, 0);
+                item_held.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                item_held.GetComponent<Rigidbody>().useGravity = false;
             }
         }
     }
