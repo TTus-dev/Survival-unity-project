@@ -6362,6 +6362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f0b98c5bdc4e841b8ff09eb1cd99ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  apl: {fileID: 11400000, guid: 260b304172c720f448bfb4c52f98dfb8, type: 2}
 --- !u!114 &1548893093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7824,6 +7825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contained_Item: {fileID: 0}
   quant_Item: 0
+  current_uses: 0
 --- !u!114 &8547881168415041276
 MonoBehaviour:
   m_ObjectHideFlags: 0

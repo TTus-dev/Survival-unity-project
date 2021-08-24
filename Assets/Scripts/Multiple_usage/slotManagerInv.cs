@@ -13,8 +13,6 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
 
     bool cursor_Over = false;
 
-    public int current_uses;
-
     private new void Start()
     {
         base.Start();

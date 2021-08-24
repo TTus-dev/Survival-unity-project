@@ -5,6 +5,7 @@ public class slotManager : MonoBehaviour
 {
     public Item contained_Item;
     public int quant_Item;
+    public int current_uses;
 
     protected Transform qnt;
     protected Transform its;
@@ -23,11 +24,14 @@ public class slotManager : MonoBehaviour
     public void exchange(slotManager s)
     {
         int temp_quant = s.quant_Item;
+        int temp_uses = s.current_uses;
         Item temp_contained = s.contained_Item;
         s.quant_Item = quant_Item;
         s.change_Item(contained_Item);
+        s.current_uses = current_uses;
         quant_Item = temp_quant;
         change_Item(temp_contained);
+        current_uses = temp_uses;
     }
 
     public void change_Item(Item x)

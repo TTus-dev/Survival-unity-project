@@ -3,12 +3,16 @@
 public class Debuging : MonoBehaviour
 {
     Player_attributes_handler attr_instance;
+    Picking_up_items Picking_up;
     Hotbar_logic hbar_instance;
     Selection_slot_logic sel_slot;
+
+    public Item apl;
 
     private void Start()
     {
         attr_instance = GetComponent<Player_attributes_handler>();
+        Picking_up = GetComponent<Picking_up_items>();
         hbar_instance = transform.Find("Hud/Hotbar").GetComponent<Hotbar_logic>();
         sel_slot = transform.Find("Hud/Inventory/Selection").GetComponent<Selection_slot_logic>();
     }
@@ -16,6 +20,7 @@ public class Debuging : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L)) Picking_up.insert_Item(apl, 19);
         if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
         if (Input.GetKeyDown(KeyCode.Tab))
         {

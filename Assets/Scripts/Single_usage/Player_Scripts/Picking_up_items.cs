@@ -11,6 +11,8 @@ public class Picking_up_items : MonoBehaviour
 
     Player_attributes_handler pattr;
 
+    Dropping_items_logic drp;
+
     struct partial_pickup_info
     {
         public Transform slot;
@@ -24,6 +26,7 @@ public class Picking_up_items : MonoBehaviour
         inv = hud.Find("Inventory/Background");
         hotbar = hud.Find("Hotbar");
         pattr = GetComponent<Player_attributes_handler>();
+        drp = hud.GetComponent<Dropping_items_logic>();
     }
 
     void Update()
@@ -53,21 +56,7 @@ public class Picking_up_items : MonoBehaviour
                 pdialogt.gameObject.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    bool stop_pickingup = false;
-                    while (!stop_pickingup)
-                    {
-                        info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
-                        slot = info.slot;
-                        if (slot != null)
-                        {
-                            slotManagerInv SM = slot.GetComponent<slotManagerInv>();
-                            SM.change_Item(dropped_item.scrptbl_obj);
-                            SM.add_quant(info.pickeditem_no);
-                            stop_pickingup = dropped_item.remove_count(info.pickeditem_no);
-                        }
-                        if (slot == inv.GetChild(inv.childCount - 1) || slot == null)
-                            break;
-                    }
+                    insert_Item(dropped_item);
                 }
             }
             else if (!aimed_object.CompareTag("Pickable"))
@@ -78,6 +67,53 @@ public class Picking_up_items : MonoBehaviour
         else
         {
             pdialog.gameObject.SetActive(false);
+        }
+    }
+
+    public void insert_Item(Item_logic dropped_item)
+    {
+        partial_pickup_info info;
+        Transform slot;
+        bool stop_pickingup = false;
+        while (!stop_pickingup)
+        {
+            info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
+            slot = info.slot;
+            if (slot != null)
+            {
+                slotManagerInv SM = slot.GetComponent<slotManagerInv>();
+                SM.change_Item(dropped_item.scrptbl_obj);
+                SM.add_quant(info.pickeditem_no);
+                stop_pickingup = dropped_item.remove_count(info.pickeditem_no);
+            }
+            if (slot == inv.GetChild(inv.childCount - 1) || slot == null)
+                stop_pickingup = true;
+        }
+    }
+
+    public void insert_Item(Item script_obj, int quant)
+    {
+        partial_pickup_info info;
+        Transform slot;
+        bool stop_pickingup = false;
+        while (!stop_pickingup)
+        {
+            info = place_checker(script_obj, quant);
+            slot = info.slot;
+            if (slot != null)
+            {
+                slotManagerInv SM = slot.GetComponent<slotManagerInv>();
+                SM.change_Item(script_obj);
+                SM.add_quant(info.pickeditem_no);
+                quant -= info.pickeditem_no;
+                if (quant == 0) stop_pickingup = true;                
+            }
+            if (slot == inv.GetChild(inv.childCount - 1) || slot == null)
+                stop_pickingup = true;
+        }
+        if (quant > 0)
+        {
+            drp.drop_item(script_obj.prefab, quant);
         }
     }
 
