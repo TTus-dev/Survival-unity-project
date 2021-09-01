@@ -50,7 +50,8 @@ public class Hotbar_logic : MonoBehaviour
                 item_held.transform.SetParent(pov_hldr);
                 item_held.transform.localPosition = new Vector3(0, -item_held.transform.localScale.y / 2, 0);
                 item_held.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                item_held.GetComponent<Rigidbody>().useGravity = false;
+                if (item_held.GetComponent<Rigidbody>() != null)
+                    item_held.GetComponent<Rigidbody>().useGravity = false;
             }
         }
     }

@@ -10,7 +10,7 @@ public class Edible : Item
 
     public override void Use()
     {
-        Player_attributes_handler pah = GameObject.Find("Player").GetComponent<Player_attributes_handler>();
+        Player_attributes_handler pah = player_reference.GetComponent<Player_attributes_handler>();
         pah.change_Hunger(nutrive_value);
         pah.change_Thirst(thrist_value);
     }

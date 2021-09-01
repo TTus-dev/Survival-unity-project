@@ -7,7 +7,7 @@ public class Debuging : MonoBehaviour
     Hotbar_logic hbar_instance;
     Selection_slot_logic sel_slot;
 
-    public Item apl;
+    public Item item;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class Debuging : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)) Picking_up.insert_Item(apl, 19);
+        if (Input.GetKeyDown(KeyCode.L)) Picking_up.insert_Item(item, 1);
         if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
