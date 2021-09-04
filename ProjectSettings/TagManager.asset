@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Pickable
+  - Processing
   layers:
   - Default
   - TransparentFX

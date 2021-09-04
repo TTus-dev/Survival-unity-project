@@ -7,6 +7,8 @@ public class Placeable : Item
 {
     Transform t_spawn;
 
+    public GameObject placed_prefab;
+
     public new void OnEnable()
     {
         base.OnEnable();
@@ -24,7 +26,7 @@ public class Placeable : Item
             {
                 if (runonce)
                 {
-                    a = GameObject.Instantiate(prefab, t_hit.point, new Quaternion());
+                    a = GameObject.Instantiate(placed_prefab, t_hit.point, new Quaternion());
                     runonce = false;
                 }
                 a.transform.position = t_hit.point;

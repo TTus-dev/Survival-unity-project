@@ -38,7 +38,7 @@ public class Hotbar_logic : MonoBehaviour
     void pov_holder_update()
     {
         slotManagerInv hbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
-        if (pov_hldr.childCount != 0 && (pov_hldr.GetChild(0).GetComponent<Item_logic>().scrptbl_obj != hbar_slot.contained_Item || hbar_slot.contained_Item == null))
+        if (pov_hldr.childCount != 0 && (last_held != hbar_slot.contained_Item || hbar_slot.contained_Item == null))
         {
             GameObject.Destroy(pov_hldr.GetChild(0).gameObject, 0);
         }
@@ -52,6 +52,7 @@ public class Hotbar_logic : MonoBehaviour
                 item_held.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 if (item_held.GetComponent<Rigidbody>() != null)
                     item_held.GetComponent<Rigidbody>().useGravity = false;
+                last_held = hbar_slot.contained_Item;
             }
         }
     }

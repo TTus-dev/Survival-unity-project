@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Picking_up_items : MonoBehaviour
 {
-    Transform pdialog;
     Transform inv;
     Transform hotbar;
 
     Player_attributes_handler pattr;
 
     Dropping_items_logic drp;
+
+    Crosshair_dialog_handler cdial;
 
     struct partial_pickup_info
     {
@@ -22,11 +22,11 @@ public class Picking_up_items : MonoBehaviour
     private void Start()
     {
         Transform hud = transform.Find("Hud");
-        pdialog = hud.Find("Pick_up_dialog");
         inv = hud.Find("Inventory/Background");
         hotbar = hud.Find("Hotbar");
         pattr = GetComponent<Player_attributes_handler>();
         drp = hud.GetComponent<Dropping_items_logic>();
+        cdial = GetComponent<Crosshair_dialog_handler>();
     }
 
     void Update()
@@ -42,18 +42,17 @@ public class Picking_up_items : MonoBehaviour
                 Item_logic dropped_item = aimed_object.GetComponent<Item_logic>();
                 partial_pickup_info info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
                 Transform slot = info.slot;
-                Text pdialogt = pdialog.GetComponent<Text>();
-                pdialogt.text = $"{dropped_item.scrptbl_obj.item_name} ({dropped_item.contained_items})";
+                cdial.Set_cdialog($"{dropped_item.scrptbl_obj.item_name} ({dropped_item.contained_items})");
                 if (slot == null)
                 {
-                    pdialogt.text += " (brak miejsca)";
-                    pdialogt.color = new Color(181, 0, 0, 255);
+                    cdial.Add_text(" (brak miejsca)");
+                    cdial.Set_dialog_color(new Color(181, 0, 0, 255));
                 }
                 else
                 {
-                    pdialogt.color = Color.black;
+                    cdial.Set_dialog_color(Color.black);
                 }
-                pdialogt.gameObject.SetActive(true);
+                cdial.Enablestate(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     insert_Item(dropped_item);
@@ -61,12 +60,12 @@ public class Picking_up_items : MonoBehaviour
             }
             else if (!aimed_object.CompareTag("Pickable"))
             {
-                pdialog.gameObject.SetActive(false);
+                cdial.Enablestate(false);
             }
         }
         else
         {
-            pdialog.gameObject.SetActive(false);
+            cdial.Enablestate(false);
         }
     }
 

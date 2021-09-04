@@ -17,3 +17,5 @@ MonoBehaviour:
   inventory_icon: {fileID: 21300000, guid: fa41096b29b9c1e49a6bd88f19e5743e, type: 3}
   max_uses: 1
   player_reference: {fileID: 0}
+  placed_prefab: {fileID: 8549279695408883920, guid: 6325411c96f759a41a5364bc75b18155,
+    type: 3}
