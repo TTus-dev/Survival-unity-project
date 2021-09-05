@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 1257024338055891282}
   - component: {fileID: 1257024338055891283}
   - component: {fileID: 1257024338055891280}
+  - component: {fileID: 5078179932586973417}
+  - component: {fileID: -155353216433920877}
   m_Layer: 10
   m_Name: Cooked_apple
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +98,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5078179932586973417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257024338055891281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab23cbe6bfa3dc4686a884d6b0c94c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrptbl_obj: {fileID: 11400000, guid: 4d09e2dccf9082a4f9164859581c3101, type: 2}
+  contained_items: 1
+--- !u!54 &-155353216433920877
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257024338055891281}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

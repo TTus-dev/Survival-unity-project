@@ -12,7 +12,7 @@ public class Placeable : Item
     public new void OnEnable()
     {
         base.OnEnable();
-        t_spawn = player_reference.transform.Find("Player_cam");
+        t_spawn = player_reference.transform.GetChild(0);
     }
 
     public override void Use()
@@ -21,8 +21,7 @@ public class Placeable : Item
         GameObject a = new GameObject();
         while (true)
         {
-            RaycastHit t_hit = new RaycastHit();
-            if (Physics.Raycast(t_spawn.position, t_spawn.forward, out t_hit, 5) && t_hit.collider.gameObject.layer == 8)
+            if (Physics.Raycast(t_spawn.position, t_spawn.forward, out RaycastHit t_hit, 5) && t_hit.collider.gameObject.layer == 8)
             {
                 if (runonce)
                 {

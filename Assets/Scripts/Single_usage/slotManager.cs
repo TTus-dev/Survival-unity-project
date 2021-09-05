@@ -46,14 +46,9 @@ public class slotManager : MonoBehaviour
         quant_Item = n;
     }
 
-    public void add_quant(int n)
+    public void change_quant(int n)
     {
         quant_Item += n;
-    }
-
-    public void subtract_quant(int n)
-    {
-        quant_Item -= n;
     }
 
     public void Display_Update()

@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item_name: "Upieczone jab\u0142ko"
   prefab: {fileID: 1257024338055891281, guid: f6fa134b2ac5f1b478015194662789d0, type: 3}
-  inventory_icon: {fileID: -2413806693520163455, guid: d9b0b0574a4a0814baf30f7dc6e07d57,
-    type: 3}
+  inventory_icon: {fileID: 21300000, guid: d9b0b0574a4a0814baf30f7dc6e07d57, type: 3}
   max_uses: 1
   player_reference: {fileID: 0}
   nutrive_value: 15

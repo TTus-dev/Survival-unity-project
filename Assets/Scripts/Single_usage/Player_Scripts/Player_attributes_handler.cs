@@ -10,6 +10,8 @@ public class Player_attributes_handler : MonoBehaviour
 
     private float pcurr_hunger, pmax_hunger, pcurr_thirst, pmax_thirst, pcurr_health, pmax_health;
 
+    public float aiming_distance;
+
     public bool inMenu = false;
 
     private void Start()
@@ -22,6 +24,7 @@ public class Player_attributes_handler : MonoBehaviour
         pcurr_hunger = pmax_hunger = 100;
         pcurr_thirst = 20;
         pcurr_hunger = 20;
+        aiming_distance = 3f;
     }
 
     public void change_Health(float x)

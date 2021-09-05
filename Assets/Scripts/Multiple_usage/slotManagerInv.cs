@@ -113,8 +113,8 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
                     else if(quant_Item < 20)
                     {
                         int quant_toAdd = pui_script._place_checker_helper(transform, Selection_slotsm.contained_Item, Selection_slotsm.quant_Item);
-                        Selection_slotsm.subtract_quant(quant_toAdd);
-                        add_quant(quant_toAdd);
+                        Selection_slotsm.change_quant(-quant_toAdd);
+                        change_quant(quant_toAdd);
                     }
                 }
                 else if (contained_Item == null)
@@ -137,7 +137,7 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
                 Selection_slotsm.change_Item(contained_Item);
                 int half = (int)Mathf.Ceil((float)quant_Item / 2);
                 Selection_slotsm.set_quant(half);
-                subtract_quant(half);
+                change_quant(-half);
                 Selection_slotl.Prev_slot = transform.GetComponent<slotManagerInv>();
             }
             else if (Selection_slotsm.contained_Item != null)
@@ -147,8 +147,8 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
                     if (contained_Item == null)
                         change_Item(Selection_slotsm.contained_Item);
                     int quant_toAdd = pui_script._place_checker_helper(transform, Selection_slotsm.contained_Item, 1);
-                    Selection_slotsm.subtract_quant(quant_toAdd);
-                    add_quant(quant_toAdd);
+                    Selection_slotsm.change_quant(-quant_toAdd);
+                    change_quant(quant_toAdd);
                 }
                 else if (contained_Item != Selection_slotsm.contained_Item)
                 {

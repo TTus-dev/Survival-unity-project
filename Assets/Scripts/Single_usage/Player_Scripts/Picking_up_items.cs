@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Picking_up_items : MonoBehaviour
+public class Picking_up_items : In_inv
 {
-    Transform inv;
-    Transform hotbar;
-
     Player_attributes_handler pattr;
 
     Dropping_items_logic drp;
 
     Crosshair_dialog_handler cdial;
+
+    Camera cam;
 
     struct partial_pickup_info
     {
@@ -19,11 +18,10 @@ public class Picking_up_items : MonoBehaviour
         public int pickeditem_no;
     }
 
-    private void Start()
+    private new void Start()
     {
-        Transform hud = transform.Find("Hud");
-        inv = hud.Find("Inventory/Background");
-        hotbar = hud.Find("Hotbar");
+        base.Start();
+        cam = transform.Find("Player_cam").GetComponent<Camera>();
         pattr = GetComponent<Player_attributes_handler>();
         drp = hud.GetComponent<Dropping_items_logic>();
         cdial = GetComponent<Crosshair_dialog_handler>();
@@ -31,10 +29,8 @@ public class Picking_up_items : MonoBehaviour
 
     void Update()
     {
-        Camera cam = transform.Find("Player_cam").GetComponent<Camera>();
         Ray cam_ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(cam_ray, out hit) && hit.distance < 2.5f && !pattr.inMenu)
+        if (Physics.Raycast(cam_ray, out RaycastHit hit) && hit.distance < pattr.aiming_distance && !pattr.inMenu)
         {
             Transform aimed_object = hit.transform;
             if (aimed_object.CompareTag("Pickable"))
@@ -53,20 +49,29 @@ public class Picking_up_items : MonoBehaviour
                     cdial.Set_dialog_color(Color.black);
                 }
                 cdial.Enablestate(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) && slot != null)
                 {
                     insert_Item(dropped_item);
                 }
             }
-            else if (!aimed_object.CompareTag("Pickable"))
+        }
+        else { cdial.Enablestate(false); }
+    }
+    public int _place_checker_helper(Transform slot, Item item, int item_ammount)
+    {
+        slotManager SM = slot.GetComponent<slotManager>();
+        if (SM.contained_Item == item || SM.contained_Item == null)
+        {
+            if (SM.quant_Item + item_ammount < 21)
             {
-                cdial.Enablestate(false);
+                return item_ammount;
+            }
+            else if (SM.quant_Item + item_ammount > 20 && SM.quant_Item < 20)
+            {
+                return 20 - SM.quant_Item;
             }
         }
-        else
-        {
-            cdial.Enablestate(false);
-        }
+        return 0;
     }
 
     public void insert_Item(Item_logic dropped_item)
@@ -82,7 +87,7 @@ public class Picking_up_items : MonoBehaviour
             {
                 slotManagerInv SM = slot.GetComponent<slotManagerInv>();
                 SM.change_Item(dropped_item.scrptbl_obj);
-                SM.add_quant(info.pickeditem_no);
+                SM.change_quant(info.pickeditem_no);
                 stop_pickingup = dropped_item.remove_count(info.pickeditem_no);
             }
             if (slot == inv.GetChild(inv.childCount - 1) || slot == null)
@@ -103,7 +108,7 @@ public class Picking_up_items : MonoBehaviour
             {
                 slotManagerInv SM = slot.GetComponent<slotManagerInv>();
                 SM.change_Item(script_obj);
-                SM.add_quant(info.pickeditem_no);
+                SM.change_quant(info.pickeditem_no);
                 quant -= info.pickeditem_no;
                 if (quant == 0) stop_pickingup = true;                
             }
@@ -114,23 +119,6 @@ public class Picking_up_items : MonoBehaviour
         {
             drp.drop_item(script_obj.prefab, quant);
         }
-    }
-
-    public int _place_checker_helper(Transform slot, Item item, int item_ammount)
-    {
-        slotManager SM = slot.GetComponent<slotManager>();
-        if (SM.contained_Item == item || SM.contained_Item == null)
-        {
-            if (SM.quant_Item + item_ammount < 21)
-            {
-                return item_ammount;
-            }
-            else if (SM.quant_Item + item_ammount > 20 && SM.quant_Item < 20)
-            {
-                return 20 - SM.quant_Item;
-            }
-        }
-        return 0;
     }
 
     partial_pickup_info place_checker(Item item, int item_ammount)
