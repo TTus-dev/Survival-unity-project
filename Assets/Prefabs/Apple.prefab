@@ -54,10 +54,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6439845505451950855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab23cbe6bfa3dc4686a884d6b0c94c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrptbl_obj: {fileID: 11400000, guid: 260b304172c720f448bfb4c52f98dfb8, type: 2}
+  scrptbl_obj: {fileID: 11400000, guid: f7d9b3bd339a85446bb218375da02ea2, type: 2}
   contained_items: 5
 --- !u!54 &7372346424947962623
 Rigidbody:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New_EdibleItem", menuName = "Items/Edible")]
+[CreateAssetMenu(fileName = "New_EdibleItem", menuName = "Items/Edible/Not Cookable")]
 public class Edible : Item
 {
     public float nutrive_value;

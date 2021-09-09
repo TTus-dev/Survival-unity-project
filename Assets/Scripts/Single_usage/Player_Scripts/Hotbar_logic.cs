@@ -6,6 +6,8 @@ public class Hotbar_logic : MonoBehaviour
 {
     Player_attributes_handler attr_instance;
 
+    slotManagerInv hotbar_slot;
+
     Item last_held;
 
     int Slot_selected = 0;
@@ -15,6 +17,7 @@ public class Hotbar_logic : MonoBehaviour
     private void Start()
     {
         attr_instance = transform.parent.parent.GetComponent<Player_attributes_handler>();
+        hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
         Display_update(true);
     }
 
@@ -24,7 +27,6 @@ public class Hotbar_logic : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                slotManagerInv hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
                 if (hotbar_slot.contained_Item != null)
                 {
                     hotbar_slot.contained_Item.Use();
@@ -69,6 +71,7 @@ public class Hotbar_logic : MonoBehaviour
             Display_update(false);
             Slot_selected = x;
             Display_update(true);
+            hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
         }
     }
 
@@ -82,6 +85,7 @@ public class Hotbar_logic : MonoBehaviour
             else
                 Slot_selected = 0;
             Display_update(true);
+            hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
         }
     }
 
@@ -95,6 +99,17 @@ public class Hotbar_logic : MonoBehaviour
             else
                 Slot_selected = 9;
             Display_update(true);
+            hotbar_slot = transform.GetChild(Slot_selected).GetComponent<slotManagerInv>();
         }
+    }
+
+    public Item Get_held_item()
+    {
+        return hotbar_slot.contained_Item;
+    }
+
+    public slotManagerInv Get_current_slot()
+    {
+        return hotbar_slot.GetComponent<slotManagerInv>();
     }
 }

@@ -31,6 +31,7 @@ public class Crosshair_dialog_handler : MonoBehaviour
             {
                 if (aimed_object.CompareTag(Ignored_tags[i]))
                 {
+                    Set_cdialog("");
                     Enablestate(false);
                     break;
                 }

@@ -38,7 +38,9 @@ public class Picking_up_items : In_inv
                 Item_logic dropped_item = aimed_object.GetComponent<Item_logic>();
                 partial_pickup_info info = place_checker(dropped_item.scrptbl_obj, dropped_item.contained_items);
                 Transform slot = info.slot;
-                cdial.Set_cdialog($"{dropped_item.scrptbl_obj.item_name} ({dropped_item.contained_items})");
+                cdial.Set_cdialog($"Podnieś {dropped_item.scrptbl_obj.item_name}");
+                if (dropped_item.contained_items > 1)
+                    cdial.Add_text($" ({dropped_item.contained_items})");
                 if (slot == null)
                 {
                     cdial.Add_text(" (brak miejsca)");
@@ -54,6 +56,7 @@ public class Picking_up_items : In_inv
                     insert_Item(dropped_item);
                 }
             }
+            cdial.Enablestate(true);
         }
         else { cdial.Enablestate(false); }
     }
