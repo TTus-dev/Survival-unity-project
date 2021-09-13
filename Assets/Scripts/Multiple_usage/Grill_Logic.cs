@@ -13,17 +13,11 @@ public class Grill_Logic : MonoBehaviour
 
     Transform top;
 
-    // Start is called before the first frame update
     void Start()
     {
         top = transform.GetChild(4);
         Fuel = transform.Find("Fuel");
         fuel_state = -1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public void IncreaseFuel()
@@ -33,6 +27,8 @@ public class Grill_Logic : MonoBehaviour
             fuel_state += 1;
             Fuel.GetChild(fuel_state).gameObject.SetActive(true);
         }
+        if (fuel_state == 0)
+            StartCoroutine(Fuel_routine());
     }
 
     public void DecreaseFuel()
@@ -54,10 +50,11 @@ public class Grill_Logic : MonoBehaviour
                 {
                     cooking_slots_s[i] = 10;
                     Vector3 cookplace_offset = top.GetChild(i).position + new Vector3(0, c.prefab.transform.lossyScale.y / 2);
-                    GameObject added_c = GameObject.Instantiate(c.prefab, cookplace_offset, new Quaternion(0, 0, 0, 0));
+                    GameObject added_c = Instantiate(c.prefab, cookplace_offset, new Quaternion(0, 0, 0, 0));
                     added_c.transform.SetParent(top.GetChild(i));
                     added_c.GetComponent<Collider>().enabled = false;
                     added_c.GetComponent<Rigidbody>().useGravity = false;
+                    top.GetChild(i).GetComponent<Cook_slot_logic>().Start_cooking(c.seconds_to_cook);
                     return true;
                 }
             }
@@ -72,7 +69,7 @@ public class Grill_Logic : MonoBehaviour
                     {
                         cooking_slots_l[i] = 1;
                         Vector3 cookplace_offset = top.GetChild(i).position + new Vector3(0, c.prefab.transform.lossyScale.y / 2);
-                        GameObject added_c = GameObject.Instantiate(c.prefab, cookplace_offset, new Quaternion(0, 0, 0, 0));
+                        GameObject added_c = Instantiate(c.prefab, cookplace_offset, new Quaternion(0, 0, 0, 0));
                         added_c.transform.SetParent(top.GetChild(i + 4));
                         added_c.GetComponent<Collider>().enabled = false;
                         added_c.GetComponent<Rigidbody>().useGravity = false;
@@ -83,4 +80,14 @@ public class Grill_Logic : MonoBehaviour
         }
         return false;
     }
+
+    IEnumerator Fuel_routine()
+    {
+        while (fuel_state > -1)
+        {
+            yield return new WaitForSeconds(120);
+            DecreaseFuel();
+        }
+    }
+
 }
