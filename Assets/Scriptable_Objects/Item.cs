@@ -15,7 +15,7 @@ public class Item : ScriptableObject
         player_reference = GameObject.Find("Player");
     }
 
-    public virtual bool Use()
+    public virtual void Use()
     {
         throw new System.NotImplementedException();
     }

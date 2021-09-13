@@ -5,27 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New_PlaceableItem", menuName = "Items/Placeable")]
 public class Placeable : Item
 {
-    Transform cam_spawn;
+    Transform t_spawn;
 
     public GameObject placed_prefab;
 
     public new void OnEnable()
     {
         base.OnEnable();
-        cam_spawn = player_reference.transform.Find("Player_cam");
+        t_spawn = player_reference.transform.GetChild(0);
     }
 
-    public override bool Use()
+    public override void Use()
     {
+        bool runonce = true;
         GameObject a = new GameObject();
-        if (Physics.Raycast(cam_spawn.position, cam_spawn.forward, out RaycastHit t_hit, 5) && t_hit.collider.gameObject.layer == 8)
+        while (true)
         {
-            if (t_hit.point != null)
+            if (Physics.Raycast(t_spawn.position, t_spawn.forward, out RaycastHit t_hit, 5) && t_hit.collider.gameObject.layer == 8)
             {
-                a = Instantiate(placed_prefab, t_hit.point, new Quaternion());
-                return true;
+                if (runonce)
+                {
+                    a = GameObject.Instantiate(placed_prefab, t_hit.point, new Quaternion());
+                    runonce = false;
+                }
+                a.transform.position = t_hit.point;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                break;
+            }
+            else if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                GameObject.Destroy(a);
+                break;
             }
         }
-        return false;
     }
 }

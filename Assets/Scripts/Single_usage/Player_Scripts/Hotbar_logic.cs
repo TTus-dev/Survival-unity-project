@@ -29,8 +29,8 @@ public class Hotbar_logic : MonoBehaviour
             {
                 if (hotbar_slot.contained_Item != null)
                 {
-                    if (hotbar_slot.contained_Item.Use())
-                        hotbar_slot.remove_Use();
+                    hotbar_slot.contained_Item.Use();
+                    hotbar_slot.remove_Use();
                 }
             }
         }
