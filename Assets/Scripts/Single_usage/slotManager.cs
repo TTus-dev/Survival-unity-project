@@ -7,6 +7,8 @@ public class slotManager : MonoBehaviour
     public int quant_Item;
     public int current_uses;
 
+    public bool TurnOffUpdate;
+
     protected Transform qnt;
     protected Transform its;
 
@@ -14,11 +16,14 @@ public class slotManager : MonoBehaviour
     {
         qnt = transform.Find("Quantity");
         its = transform.Find("Item_image");
+        if (TurnOffUpdate)
+            Display_Update();
     }
 
     private void Update()
     {
-        Display_Update();
+        if (!TurnOffUpdate)
+            Display_Update();
     }
 
     public void exchange(slotManager s)

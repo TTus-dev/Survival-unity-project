@@ -22,6 +22,21 @@ public class Debuging : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L)) Picking_up.insert_Item(item, 1);
         if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (attr_instance.inMenu)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                attr_instance.inMenu = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                attr_instance.inMenu = true;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (transform.Find("Hud/Inventory") != null)
