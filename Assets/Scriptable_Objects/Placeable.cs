@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New_PlaceableItem", menuName = "Items/Placeable")]
-public class Placeable : Item
+public class Placeable : Craftable
 {
     Transform cam_spawn;
 

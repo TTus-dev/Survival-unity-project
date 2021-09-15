@@ -17,7 +17,10 @@ public class slotManager : MonoBehaviour
         qnt = transform.Find("Quantity");
         its = transform.Find("Item_image");
         if (TurnOffUpdate)
-            Display_Update();
+        {
+            its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
+            its.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
