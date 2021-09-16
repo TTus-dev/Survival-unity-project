@@ -53,7 +53,10 @@ public class Hotbar_logic : MonoBehaviour
                 item_held.transform.localPosition = new Vector3(0, -item_held.transform.localScale.y / 2, 0);
                 item_held.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 if (item_held.GetComponent<Rigidbody>() != null)
+                {
                     item_held.GetComponent<Rigidbody>().useGravity = false;
+                    item_held.GetComponent<Rigidbody>().isKinematic = true;
+                }
                 last_held = hbar_slot.contained_Item;
             }
         }

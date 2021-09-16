@@ -42,12 +42,15 @@ public class slotManager : MonoBehaviour
         current_uses = temp_uses;
     }
 
-    public void change_Item(Item x)
+    public void change_Item(Item x, int i = 0)
     {
         contained_Item = x;
+        if (i == 1)
+            Start();
         if (contained_Item != null)
-            Debug.Log(its == null);
             its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
+        else
+            its.GetComponent<Image>().sprite = null;
     }
 
     public void set_quant(int n)

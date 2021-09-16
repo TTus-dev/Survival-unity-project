@@ -11,6 +11,8 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
 
     slotManagerInv hotbar_slot = null;
 
+    GameObject inv;
+
     bool cursor_Over = false;
 
     private new void Start()
@@ -20,6 +22,7 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
         Selection_slotl = GameObject.Find("Player/Hud/Inventory/Selection").GetComponent<Selection_slot_logic>();
         pui_script = GameObject.Find("Player").GetComponent<Picking_up_items>();
         Hotbar = GameObject.Find("Player/Hud/Hotbar").transform;
+        inv = GameObject.Find("Player/Hud/Inventory");
     }
 
     private void Update()
@@ -78,7 +81,7 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
         Display_Update();
     }
 
-    public new void change_Item(Item x)
+    public void change_Item(Item x)
     {
         base.change_Item(x);
         current_uses = x.max_uses;
@@ -91,7 +94,7 @@ public class slotManagerInv : slotManager, IPointerClickHandler, IPointerEnterHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left && inv.activeSelf)
         {
             if (Selection_slotsm.contained_Item == null && contained_Item != null)
             {

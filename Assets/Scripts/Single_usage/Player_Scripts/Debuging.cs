@@ -41,6 +41,8 @@ public class Debuging : MonoBehaviour
                     Cursor.visible = true;
                     attr_instance.inMenu = true;
                     craft.gameObject.SetActive(true);
+                    craft.Find("CraftingSelected").GetComponent<CraftSelReset>().Reset();
+                    craft.Find("ViewPort2").GetComponent<CraftArrayLogic>().Clear();
                     transform.Find("Hud/Panel").gameObject.SetActive(true);
                 }
             }

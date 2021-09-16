@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrptbl_obj: {fileID: 11400000, guid: ce1f021dc796be649bdfab2f1e2cd08e, type: 2}
-  contained_items: 20
+  contained_items: 10
 --- !u!65 &2034577886653384774
 BoxCollider:
   m_ObjectHideFlags: 0
