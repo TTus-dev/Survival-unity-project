@@ -9,6 +9,7 @@ public class Item : ScriptableObject
     public GameObject prefab;
     public Sprite inventory_icon;
     public int max_uses = 1;
+    public int max_stack;
     public GameObject player_reference;
 
     public void OnEnable()

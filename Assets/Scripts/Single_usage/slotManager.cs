@@ -46,6 +46,7 @@ public class slotManager : MonoBehaviour
     {
         contained_Item = x;
         if (contained_Item != null)
+            Debug.Log(its == null);
             its.GetComponent<Image>().sprite = contained_Item.inventory_icon;
     }
 
