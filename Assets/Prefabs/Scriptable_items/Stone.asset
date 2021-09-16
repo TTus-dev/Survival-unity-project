@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88dcd08aca33aa478b7db14095b4839, type: 3}
-  m_Name: Watermelon
+  m_Script: {fileID: 11500000, guid: 0e3c98b02baf8724c92b595a0638873e, type: 3}
+  m_Name: Stone
   m_EditorClassIdentifier: 
-  item_name: Arbuz
-  prefab: {fileID: 4825027618324219623, guid: ec1773df9767f854bb8025d45e5cd574, type: 3}
-  inventory_icon: {fileID: 21300000, guid: e4a37faea7033be4d83650bdb15d12bb, type: 3}
+  item_name: "Kamie\u0144"
+  prefab: {fileID: 6490114494408971745, guid: 2268dbf537159524986ccd660ec6adab, type: 3}
+  inventory_icon: {fileID: -9095717837082945937, guid: 2910bea2519b8a84794e058328e8bbc2,
+    type: 3}
   max_uses: 1
   max_stack: 10
   player_reference: {fileID: 0}
-  nutrive_value: 10
-  thrist_value: 5

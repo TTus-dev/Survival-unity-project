@@ -65,13 +65,13 @@ public class Picking_up_items : In_inv
         slotManager SM = slot.GetComponent<slotManager>();
         if (SM.contained_Item == item || SM.contained_Item == null)
         {
-            if (SM.quant_Item + item_ammount < 21)
+            if (SM.quant_Item + item_ammount <= item.max_stack)
             {
                 return item_ammount;
             }
-            else if (SM.quant_Item + item_ammount > 20 && SM.quant_Item < 20)
+            else if (SM.quant_Item + item_ammount > item.max_stack && SM.quant_Item < item.max_stack)
             {
-                return 20 - SM.quant_Item;
+                return item.max_stack - SM.quant_Item;
             }
         }
         return 0;

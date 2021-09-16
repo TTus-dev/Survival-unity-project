@@ -22,16 +22,21 @@ public class Dropping_items_logic : MonoBehaviour
         {
             if (selection_slot.contained_Item != null && outside_inv)
             {
-                drop_item(selection_slot.contained_Item.prefab, selection_slot.quant_Item);
+                if (selection_slot.contained_Item is Placeable)
+                    drop_item(selection_slot.contained_Item.prefab, selection_slot.quant_Item, selection_slot.contained_Item);
+                else
+                    drop_item(selection_slot.contained_Item.prefab, selection_slot.quant_Item);
                 selection_slot.set_quant(0);
             }
         }
     }
 
-    public void drop_item(GameObject item_prefab, int quant)
+    public void drop_item(GameObject item_prefab, int quant, Item Scrptbl = null)
     {
         Vector3 inst_pos = player_view.transform.position + player_view.transform.forward * 2;
         GameObject dropped = Instantiate(item_prefab, inst_pos, Quaternion.identity);
         dropped.GetComponent<Item_logic>().contained_items = quant;
+        if (Scrptbl != null)
+            dropped.GetComponent<Item_logic>().scrptbl_obj = Scrptbl;
     }
 }

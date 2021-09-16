@@ -22,11 +22,35 @@ public class Debuging : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L)) Picking_up.insert_Item(item, 1);
         if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Transform craft = transform.Find("Hud/Crafting");
+            if (craft != null)
+            {
+                if (attr_instance.inMenu && craft.gameObject.activeSelf)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    attr_instance.inMenu = false;
+                    craft.gameObject.SetActive(false);
+                    transform.Find("Hud/Panel").gameObject.SetActive(false);
+                }
+                else if (!attr_instance.inMenu && !craft.gameObject.activeSelf)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    attr_instance.inMenu = true;
+                    craft.gameObject.SetActive(true);
+                    transform.Find("Hud/Panel").gameObject.SetActive(true);
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (transform.Find("Hud/Inventory") != null)
+            Transform inv = transform.Find("Hud/Inventory");
+            if (inv != null)
             {
-                if (attr_instance.inMenu)
+                if (attr_instance.inMenu && inv.gameObject.activeSelf)
                 {
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
@@ -35,7 +59,7 @@ public class Debuging : MonoBehaviour
                     transform.Find("Hud/Inventory").gameObject.SetActive(false);
                     transform.Find("Hud/Panel").gameObject.SetActive(false);
                 }
-                else
+                else if (!attr_instance.inMenu && !inv.gameObject.activeSelf)
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
