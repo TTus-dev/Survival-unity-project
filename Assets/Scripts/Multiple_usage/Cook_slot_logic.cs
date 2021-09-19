@@ -30,7 +30,6 @@ public class Cook_slot_logic : MonoBehaviour
         float ttc = x;
         while (ttc > 0f)
         {
-            Debug.Log($"Ttc: {ttc}");
             yield return new WaitForSeconds(.1f);
             if (gl.fuel_state > -1)
                 ttc -= .1f;

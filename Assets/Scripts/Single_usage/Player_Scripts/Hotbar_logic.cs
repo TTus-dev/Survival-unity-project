@@ -10,6 +10,8 @@ public class Hotbar_logic : MonoBehaviour
 
     Item last_held;
 
+    bool SpamPreventBool;
+
     int Slot_selected = 0;
 
     public Transform pov_hldr;
@@ -29,8 +31,20 @@ public class Hotbar_logic : MonoBehaviour
             {
                 if (hotbar_slot.contained_Item != null)
                 {
-                    if (hotbar_slot.contained_Item.Use())
-                        hotbar_slot.remove_Use();
+                    if (hotbar_slot.contained_Item is Tool && !SpamPreventBool)
+                    {
+                        SpamPreventBool = true;
+                        StartCoroutine(StopSpam());
+                        hotbar_slot.contained_Item.Use();
+                        pov_hldr.GetChild(0).GetComponent<ToolSwing>().check_col = true;
+                        if (false)
+                            hotbar_slot.remove_Use();
+                    }
+                    else if (!(hotbar_slot.contained_Item is Tool))
+                    {
+                        if (hotbar_slot.contained_Item.Use())
+                            hotbar_slot.remove_Use();
+                    }
                 }
             }
         }
@@ -50,7 +64,7 @@ public class Hotbar_logic : MonoBehaviour
             {
                 GameObject item_held = Instantiate(hbar_slot.contained_Item.prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 item_held.transform.SetParent(pov_hldr);
-                item_held.transform.localPosition = new Vector3(0, -item_held.transform.localScale.y / 2, 0);
+                item_held.transform.localPosition = new Vector3(0, -item_held.transform.lossyScale.y / 2, 0);
                 item_held.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 if (item_held.GetComponent<Rigidbody>() != null)
                 {
@@ -114,5 +128,12 @@ public class Hotbar_logic : MonoBehaviour
     public slotManagerInv Get_current_slot()
     {
         return hotbar_slot.GetComponent<slotManagerInv>();
+    }
+
+    IEnumerator StopSpam()
+    {
+        yield return new WaitForSeconds(1f);
+        SpamPreventBool = false;
+        StopCoroutine(StopSpam());
     }
 }

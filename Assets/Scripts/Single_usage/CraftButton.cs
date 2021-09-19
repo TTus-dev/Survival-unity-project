@@ -13,9 +13,10 @@ public class CraftButton : MonoBehaviour
 
     private void Start()
     {
-        Pui = GameObject.Find("Player").GetComponent<Picking_up_items>();
-        CraftSelection_Slot = GameObject.Find("Player/Hud/Crafting/CraftingSelected/CraftingSlot").GetComponent<slotManager>();
-        Cii = GameObject.Find("Player").GetComponent<Craft_inv_interface>();
+        GameObject player = GameObject.Find("Player");
+        Pui = player.GetComponent<Picking_up_items>();
+        CraftSelection_Slot = player.transform.Find("Hud/Crafting/CraftingSelected/CraftingSlot").GetComponent<slotManager>();
+        Cii = player.GetComponent<Craft_inv_interface>();
     }
 
     public void Craft()
@@ -27,6 +28,8 @@ public class CraftButton : MonoBehaviour
         for (int i = 0; i < CI.Comps.Length; i++)
         {
             Cii.remove_component(CI.Comps[i], CI.comp_quants[i]);
+            if (!transform.parent.Find("ViewPort2").GetChild(0).GetChild(i).GetComponent<ComponentPanel>().Refresh())
+                gameObject.GetComponent<Button>().interactable = false;
         }
     }
 }

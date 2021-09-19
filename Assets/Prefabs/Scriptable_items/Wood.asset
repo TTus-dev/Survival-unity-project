@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: 
   item_name: Drewno
-  prefab: {fileID: 3820812625652558047, guid: 75aea668107bb0444aac518a3440bbff, type: 3}
+  prefab: {fileID: 1602120406779379814, guid: 75aea668107bb0444aac518a3440bbff, type: 3}
   inventory_icon: {fileID: 21300000, guid: 098067e1eb939024dbae88a83d383680, type: 3}
   max_uses: 1
   max_stack: 20

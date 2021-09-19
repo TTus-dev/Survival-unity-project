@@ -39,4 +39,6 @@ public class CraftingPanel_logic : MonoBehaviour, IPointerClickHandler
             }
         }
     }
+
+
 }
