@@ -6,7 +6,7 @@ public class Hotbar_logic : MonoBehaviour
 {
     Player_attributes_handler attr_instance;
 
-    slotManagerInv hotbar_slot;
+    public slotManagerInv hotbar_slot;
 
     Item last_held;
 
@@ -37,8 +37,6 @@ public class Hotbar_logic : MonoBehaviour
                         StartCoroutine(StopSpam());
                         hotbar_slot.contained_Item.Use();
                         pov_hldr.GetChild(0).GetComponent<ToolSwing>().check_col = true;
-                        if (false)
-                            hotbar_slot.remove_Use();
                     }
                     else if (!(hotbar_slot.contained_Item is Tool))
                     {
