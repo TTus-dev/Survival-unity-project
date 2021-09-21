@@ -9,6 +9,8 @@ TagManager:
   - Fuel
   - Grill_top
   - Resource_source
+  - GetHitByAxe
+  - GetHitBySpear
   layers:
   - Default
   - TransparentFX
