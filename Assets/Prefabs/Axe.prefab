@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5251259612253280883}
   - component: {fileID: 5251259612253280886}
   - component: {fileID: 5251259612253280885}
-  - component: {fileID: 7829852062082497081}
+  - component: {fileID: 3863974178997348703}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Pickable
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7829852062082497081
+--- !u!65 &3863974178997348703
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 5251259612894902798}
   - component: {fileID: 5251259612894902797}
   - component: {fileID: 5251259612894902796}
-  - component: {fileID: 4499972868551544118}
+  - component: {fileID: 5344065305418808933}
   m_Layer: 10
   m_Name: Cylinder
   m_TagString: Pickable
@@ -179,7 +179,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4499972868551544118
+--- !u!136 &5344065305418808933
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,9 +190,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
-  m_Height: 1.6230781
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.00000004656613, y: -0.18846074, z: -0.00000009313226}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5251259613775081023
 GameObject:
   m_ObjectHideFlags: 0

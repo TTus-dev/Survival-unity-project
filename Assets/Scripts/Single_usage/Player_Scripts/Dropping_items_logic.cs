@@ -36,6 +36,8 @@ public class Dropping_items_logic : MonoBehaviour
         Vector3 inst_pos = player_view.transform.position + player_view.transform.forward * 2;
         GameObject dropped = Instantiate(item_prefab, inst_pos, Quaternion.identity);
         dropped.GetComponent<Item_logic>().contained_items = quant;
+        if (dropped.GetComponent<Item_logic>().scrptbl_obj is Tool)
+            dropped.GetComponent<Animator>().enabled = false;
         if (Scrptbl != null)
             dropped.GetComponent<Item_logic>().scrptbl_obj = Scrptbl;
     }

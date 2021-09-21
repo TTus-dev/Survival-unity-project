@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: acf344a8aa773cd4cb1c1d71f5438489, type: 2}
   - {fileID: 11400000, guid: ce1f021dc796be649bdfab2f1e2cd08e, type: 2}
   comp_quants: 0100000002000000
+  anim_name: Axe

@@ -130,7 +130,7 @@ public class Hotbar_logic : MonoBehaviour
 
     IEnumerator StopSpam()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         SpamPreventBool = false;
         StopCoroutine(StopSpam());
     }

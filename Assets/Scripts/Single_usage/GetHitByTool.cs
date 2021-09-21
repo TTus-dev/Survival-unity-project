@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GetHitByTool : MonoBehaviour
 {
-    protected int hits_left;
+    public int hits_left;
 
     protected void remove_hit()
     {
