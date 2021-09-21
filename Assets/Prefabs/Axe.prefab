@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5251259612253280883}
   - component: {fileID: 5251259612253280886}
   - component: {fileID: 5251259612253280885}
-  m_Layer: 0
+  - component: {fileID: 7829852062082497081}
+  m_Layer: 10
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,6 +83,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7829852062082497081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251259612253280882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5251259612894902794
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,9 +107,10 @@ GameObject:
   - component: {fileID: 5251259612894902798}
   - component: {fileID: 5251259612894902797}
   - component: {fileID: 5251259612894902796}
-  m_Layer: 0
+  - component: {fileID: 4499972868551544118}
+  m_Layer: 10
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,8 +123,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5251259612894902794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.15, z: 0.02}
+  m_LocalPosition: {x: 0, y: -0.0297, z: -0}
+  m_LocalScale: {x: 0.02, y: 0.120239735, z: 0.02}
   m_Children: []
   m_Father: {fileID: 5251259613775081008}
   m_RootOrder: 1
@@ -164,6 +179,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &4499972868551544118
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251259612894902794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 1.6230781
+  m_Direction: 1
+  m_Center: {x: 0.00000004656613, y: -0.18846074, z: -0.00000009313226}
 --- !u!1 &5251259613775081023
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,11 +205,10 @@ GameObject:
   - component: {fileID: 5251259613775081009}
   - component: {fileID: 5388893505047967980}
   - component: {fileID: 2618459037617591448}
-  - component: {fileID: 8624462901558224602}
-  - component: {fileID: 3197173551980963604}
-  m_Layer: 0
+  - component: {fileID: 758307273942307834}
+  m_Layer: 10
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,20 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   check_col: 0
---- !u!65 &8624462901558224602
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5251259613775081023}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.042556167, y: 0.06980574, z: 0.03528759}
-  m_Center: {x: -0.000014960766, y: 0.119996876, z: 0.055182263}
---- !u!54 &3197173551980963604
+  affected_tag: GetHitByAxe
+--- !u!54 &758307273942307834
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc92d0da17dc9804ca8c124514f2366b, type: 3}
-  m_Name: Axe
+  m_Name: Spear
   m_EditorClassIdentifier: 
-  item_name: Siekiera
-  prefab: {fileID: 5251259613775081023, guid: ffb60e70184414d45ba4a7cac6ea5746, type: 3}
-  inventory_icon: {fileID: 21300000, guid: 2da7b23915635ef42a5576a36dff4394, type: 3}
+  item_name: "W\u0142\xF3cznia"
+  prefab: {fileID: 8878172415145542123, guid: 98fa1047d2bafcc4ab99e91c3d598a82, type: 3}
+  inventory_icon: {fileID: 21300000, guid: d60b93b381379bc4487b63f0d9760fdc, type: 3}
   max_uses: 100
   max_stack: 1
   player_reference: {fileID: 0}
   Comps:
   - {fileID: 11400000, guid: acf344a8aa773cd4cb1c1d71f5438489, type: 2}
   - {fileID: 11400000, guid: ce1f021dc796be649bdfab2f1e2cd08e, type: 2}
-  comp_quants: 0100000002000000
+  comp_quants: 0100000001000000
