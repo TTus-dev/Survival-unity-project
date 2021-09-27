@@ -35,6 +35,7 @@ public class Hotbar_logic : MonoBehaviour
                     {
                         SpamPreventBool = true;
                         StartCoroutine(StopSpam());
+                        StartCoroutine(HitTimeWindow());
                         hotbar_slot.contained_Item.Use();
                         pov_hldr.GetChild(0).GetComponent<ToolSwing>().check_col = true;
                     }
@@ -68,6 +69,13 @@ public class Hotbar_logic : MonoBehaviour
                 {
                     item_held.GetComponent<Rigidbody>().useGravity = false;
                     item_held.GetComponent<Rigidbody>().isKinematic = true;
+                    if (item_held.GetComponent<Item_logic>().scrptbl_obj is Tool)
+                    {
+                        foreach (Transform child in item_held.transform)
+                        {
+                            child.GetComponent<Collider>().isTrigger = true;
+                        }
+                    }
                 }
                 last_held = hbar_slot.contained_Item;
             }
@@ -126,6 +134,13 @@ public class Hotbar_logic : MonoBehaviour
     public slotManagerInv Get_current_slot()
     {
         return hotbar_slot.GetComponent<slotManagerInv>();
+    }
+
+    IEnumerator HitTimeWindow()
+    {
+        yield return new WaitForSeconds(0.08f);
+        pov_hldr.GetChild(0).GetComponent<ToolSwing>().check_col = false;
+        StopCoroutine(HitTimeWindow());
     }
 
     IEnumerator StopSpam()

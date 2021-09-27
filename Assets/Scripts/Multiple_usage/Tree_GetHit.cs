@@ -28,6 +28,6 @@ public class Tree_GetHit : GetHitByTool
         int rand_drop = Random.Range(0, drop_items.Count);
         Pui.insert_Item(drop_items[rand_drop], 1);
         drop_items.RemoveAt(rand_drop);
-        remove_hit();
+        base.GetHit();
     }
 }

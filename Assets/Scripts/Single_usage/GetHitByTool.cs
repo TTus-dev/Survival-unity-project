@@ -13,5 +13,5 @@ public class GetHitByTool : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public virtual void GetHit() { }
+    public virtual void GetHit() { remove_hit(); }
 }
